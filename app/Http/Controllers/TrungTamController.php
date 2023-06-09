@@ -9,6 +9,8 @@ use Illuminate\View\View;
 
 class TrungTamController extends Controller
 {
+    private $breadcrumb = 'TrungTam';
+
     /**
      * @param Request $request
      * 
@@ -19,7 +21,8 @@ class TrungTamController extends Controller
         $listTrungTam = TrungTam::all();
         
         return view('dashboard.trungtam.danhsach', [
-            'listTrungTam' => $listTrungTam
+            'listTrungTam'  => $listTrungTam,
+            'breadcrumb'    => $this->breadcrumb
         ]);
     }
 
@@ -28,10 +31,17 @@ class TrungTamController extends Controller
      */
     public function viewCreate() : View
     {
-        return view('dashboard.trungtam.themmoi');
+        return view('dashboard.trungtam.themmoi', [
+            'breadcrumb' => $this->breadcrumb
+        ]);
     }
 
-    public function create(Request $request)
+    /**
+     * @param Request $request
+     * 
+     * @return RedirectResponse
+     */
+    public function create(Request $request) : RedirectResponse
     {
         $data = [
             'tenTrungTam'   => $request->tenTrungTam,
@@ -45,7 +55,12 @@ class TrungTamController extends Controller
         return redirect()->route('trung-tam.create')->with('msg', 'Thêm mới thành công');
     }
 
-    public function viewUpdate($id)
+    /**
+     * @param integer $id
+     * 
+     * @return RedirectResponse|View
+     */
+    public function viewUpdate(int $id) : RedirectResponse|View
     {
         $trungTam = TrungTam::find($id);
 
@@ -54,11 +69,18 @@ class TrungTamController extends Controller
         }
 
         return view('dashboard.trungtam.chitiet', [
-            'trungTam' => $trungTam
+            'trungTam'      => $trungTam,
+            'breadcrumb'    => $this->breadcrumb
         ]);
     }
 
-    public function update($id, Request $request)
+    /**
+     * @param integer $id
+     * @param Request $request
+     * 
+     * @return RedirectResponse|View
+     */
+    public function update(int $id, Request $request) : RedirectResponse|View
     {
         $trungTam = TrungTam::find($id);
 
@@ -75,15 +97,15 @@ class TrungTamController extends Controller
 
         $trungTam->update($data);
 
-        return redirect()->route('trung-tam.chitiet')->with('msg', 'Cập nhật thành công');
+        return redirect()->route('trung-tam.update', ['id' => $id])->with('msg', 'Cập nhật thành công');
     }
 
     /**
      * @param integer $id
      * 
-     * @return void
+     * @return RedirectResponse
      */
-    public function destroy(int $id)
+    public function destroy(int $id) : RedirectResponse
     {
         $trungTam = TrungTam::find($id);
 
@@ -96,3 +118,4 @@ class TrungTamController extends Controller
         return redirect()->route('trung-tam.list')->with('msg', 'Xoá thành công');
     }
 }
+

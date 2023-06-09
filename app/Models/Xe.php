@@ -20,7 +20,7 @@ class Xe extends Model
         'hangSX',
         'dongXe',
         'mucDichSuDung',
-        'user_id',
+        'tenChuXe',
         'trangThai'
     ];
 }

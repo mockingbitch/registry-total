@@ -4,6 +4,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController as UserController;
 use App\Http\Controllers\HomeController as HomeController;
 use App\Http\Controllers\TrungTamController as TrungTamController;
+use App\Http\Controllers\XeController as XeController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -36,6 +38,16 @@ Route::group(['middleware' => ['check.login', 'check.role']], function () {
             Route::get('/{id}', [TrungTamController::class, 'viewUpdate'])->name('trung-tam.update');
             Route::post('/{id}', [TrungTamController::class, 'update']);
             Route::get('/xoa/{id}', [TrungTamController::class, 'destroy'])->name('trung-tam.delete');
+        });
+
+        //XE
+        Route::prefix('xe')->group(function () {
+            Route::get('/', [XeController::class, 'list'])->name('xe.list');
+            Route::get('/them-moi', [XeController::class, 'viewCreate'])->name('xe.create');
+            Route::post('/them-moi', [XeController::class, 'create']);
+            Route::post('/import', [XeController::class, 'import'])->name('xe.import');
+            Route::get('/export', [XeController::class, 'export'])->name('xe.export');
+            Route::get('/{id}', [XeController::class, 'viewUpdate'])->name('xe.update');
         });
     });
 });

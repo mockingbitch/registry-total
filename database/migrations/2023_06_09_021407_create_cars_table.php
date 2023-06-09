@@ -13,15 +13,14 @@ return new class extends Migration
     {
         Schema::create('tbl_xe', function (Blueprint $table) {
             $table->id();
-            $table->string('giayChungNhan');
-            $table->string('bienSo');
-            $table->string('noiDangKy');
+            $table->string('giayChungNhan')->nullable();
+            $table->string('bienSo')->nullable();
+            $table->string('noiDangKy')->nullable();
             $table->string('hangSX')->nullable();
             $table->string('dongXe')->nullable();
-            $table->string('mucDichSuDung');
-            $table->unsignedBigInteger('user_id');
-            $table->foreign('user_id')->references('id')->on('users');
-            $table->integer('trangThai');
+            $table->string('mucDichSuDung')->nullable();
+            $table->string('tenChuXe')->nullable();
+            $table->string('trangThai')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

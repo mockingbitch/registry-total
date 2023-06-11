@@ -15,14 +15,14 @@ class XeImport implements ToModel
     public function model(array $row)
     {
         return new Xe([
-           'giayChungNhan'  => $row[0],
-           'bienSo'         => $row[1],
-           'noiDangKy'      => $row[2],
-           'hangSX'         => $row[3],
-           'dongXe'         => $row[4],
-           'mucDichSuDung'  => $row[5],
-           'tenChuXe'       => $row[6],
-           'trangThai'      => $row[7]
+            'tenChuXe'       => $row[1],
+            'giayChungNhan'  => $row[2],
+            'bienSo'         => $row[3],
+            'noiDangKy'      => $row[4],
+            'hangSX'         => $row[5],
+            'dongXe'         => $row[6],
+            'mucDichSuDung'  => $row[7],
+            'trangThai'      => $row[8]
         ]);
     }
 }

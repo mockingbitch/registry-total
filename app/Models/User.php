@@ -24,7 +24,7 @@ class User extends Authenticatable
         'tinhThanh',
         'thuongTru',
         'cccd',
-        'center_id',
+        'trungtam_id',
         'role',
         'trangThai'
     ];
@@ -48,4 +48,9 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    public function trungTam()
+    {
+        return $this->belongsTo(\App\Models\TrungTam::class, 'trungtam_id');
+    }
 }

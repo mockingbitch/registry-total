@@ -19,8 +19,8 @@ class CheckRole
             return redirect()->route('login')->with('errMsg', 'Vui lòng đăng nhập');
         endif;
 
-        if (! in_array($user->role, ['admin', 'nhanvien'])) :
-            return redirect()->route('home')->with('msg', 'Khồng đủ quyền');
+        if (! in_array($user->role, ['admin'])) :
+            return redirect()->route('nhanvien.home')->with('msg', 'Khồng đủ quyền');
         endif;
 
         return $next($request);

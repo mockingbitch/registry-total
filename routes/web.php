@@ -5,6 +5,8 @@ use App\Http\Controllers\UserController as UserController;
 use App\Http\Controllers\HomeController as HomeController;
 use App\Http\Controllers\TrungTamController as TrungTamController;
 use App\Http\Controllers\XeController as XeController;
+use App\Http\Controllers\NguoiDungController as NguoiDungController;
+use App\Http\Controllers\DangKiemController as DangKiemController;
 
 
 /*
@@ -44,10 +46,36 @@ Route::group(['middleware' => ['check.login', 'check.role']], function () {
         Route::prefix('xe')->group(function () {
             Route::get('/', [XeController::class, 'list'])->name('xe.list');
             Route::get('/them-moi', [XeController::class, 'viewCreate'])->name('xe.create');
-            Route::post('/them-moi', [XeController::class, 'create']);
+            Route::post('/them-moi', [XeController::class, 'create'])->name('xe.create.post');
             Route::post('/import', [XeController::class, 'import'])->name('xe.import');
             Route::get('/export', [XeController::class, 'export'])->name('xe.export');
-            Route::get('/{id}', [XeController::class, 'viewUpdate'])->name('xe.update');
+            Route::get('/chi-tiet/{id}', [XeController::class, 'viewUpdate'])->name('xe.update');
+            Route::post('/chi-tiet/{id}', [XeController::class, 'update']);
+            Route::get('/xoa/{id}', [XeController::class, 'destroy'])->name('xe.delete');
         });
+
+        //User
+        Route::prefix('user')->group(function () {
+            Route::get('/', [NguoiDungController::class, 'list'])->name('user.list');
+            Route::get('/them-moi', [NguoiDungController::class, 'viewCreate'])->name('user.create');
+            Route::post('/them-moi', [NguoiDungController::class, 'create']);
+            Route::get('/{id}', [NguoiDungController::class, 'viewUpdate'])->name('user.update');
+            Route::post('/{id}', [NguoiDungController::class, 'update']);
+            Route::get('/xoa/{id}', [NguoiDungController::class, 'destroy'])->name('user.delete');
+        });
+    });
+});
+
+Route::group(['middleware' => ['check.login']], function () {
+    Route::get('/', [HomeController::class, 'nhanVienIndex'])->name('nhanvien.home');
+
+    //DANG KIEM
+    Route::prefix('dangkiem')->group(function () {
+        Route::get('/', [DangKiemController::class, 'list'])->name('dangkiem.list');
+        Route::get('/them-moi', [DangKiemController::class, 'viewCreate'])->name('dangkiem.create');
+        Route::post('/them-moi', [DangKiemController::class, 'create']);
+        Route::get('/{id}', [DangKiemController::class, 'viewUpdate'])->name('dangkiem.update');
+        Route::post('/{id}', [DangKiemController::class, 'update']);
+        Route::get('/xoa/{id}', [DangKiemController::class, 'destroy'])->name('dangkiem.delete'); 
     });
 });

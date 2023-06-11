@@ -14,10 +14,21 @@ class DangKiem extends Model
     protected $table = 'tbl_dangkiem';
 
     protected $fillable = [
+        'xe_id',
         'maSoCap',
         'ngayCap',
         'ngayHetHan',
-        'center_id',
+        'trungtam_id',
         'trangThai'
     ];
+
+    public function xe()
+    {
+        return $this->belongsTo(\App\Models\Xe::class, 'xe_id');
+    }
+
+    public function trungtam()
+    {
+        return $this->belongsTo(\App\Models\TrungTam::class, 'trungtam_id');
+    }
 }

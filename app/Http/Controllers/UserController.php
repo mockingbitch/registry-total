@@ -13,6 +13,9 @@ use App\Constants\Constant;
 
 class UserController extends Controller
 {
+    /**
+     * @return View
+     */
     public function viewLogin() : View
     {
         return view('auth.login');

@@ -8,6 +8,7 @@ use Illuminate\View\View;
 use App\Models\DangKiem;
 use App\Models\Xe;
 use Carbon\Carbon;
+use App\Http\Requests\DangKiemRequest;
 
 class DangKiemController extends Controller
 {
@@ -35,8 +36,7 @@ class DangKiemController extends Controller
             }
         } else if ($option == 'indate') {
             $listDangKiem = DangKiem::where('ngayHetHan', '>', Carbon::now())->get();
-        }
-        else {
+        } else {
             $listDangKiem = DangKiem::all();
         }
 
@@ -61,9 +61,11 @@ class DangKiemController extends Controller
     }
 
     /**
+     * @param DangKiemRequest $request
+     * 
      * @return RedirectResponse
      */
-    public function create(Request $request) : RedirectResponse
+    public function create(DangKiemRequest $request) : RedirectResponse
     {
         $user = auth()->guard('user')->user();
 
@@ -104,11 +106,11 @@ class DangKiemController extends Controller
 
     /**
      * @param integer $id
-     * @param Request $request
+     * @param DangKiemRequest $request
      * 
      * @return RedirectResponse
      */
-    public function update(int $id, Request $request) : RedirectResponse
+    public function update(int $id, DangKiemRequest $request) : RedirectResponse
     {
         $dangKiem = DangKiem::find($id);
         $user = auth()->guard('user')->user();

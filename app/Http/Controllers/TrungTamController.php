@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\TrungTam;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
+use App\Http\Requests\TrungTamRequest;
 
 class TrungTamController extends Controller
 {
@@ -37,11 +38,11 @@ class TrungTamController extends Controller
     }
 
     /**
-     * @param Request $request
+     * @param TrungTamRequest $request
      * 
      * @return RedirectResponse
      */
-    public function create(Request $request) : RedirectResponse
+    public function create(TrungTamRequest $request) : RedirectResponse
     {
         $data = [
             'tenTrungTam'   => $request->tenTrungTam,
@@ -76,11 +77,11 @@ class TrungTamController extends Controller
 
     /**
      * @param integer $id
-     * @param Request $request
+     * @param TrungTamRequest $request
      * 
      * @return RedirectResponse|View
      */
-    public function update(int $id, Request $request) : RedirectResponse|View
+    public function update(int $id, TrungTamRequest $request) : RedirectResponse|View
     {
         $trungTam = TrungTam::find($id);
 

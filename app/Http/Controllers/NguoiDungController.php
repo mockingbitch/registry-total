@@ -7,6 +7,7 @@ use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
 use App\Models\TrungTam;
+use App\Http\Requests\UserRequest;
 
 class NguoiDungController extends Controller
 {
@@ -38,7 +39,12 @@ class NguoiDungController extends Controller
         ]);
     }
 
-    public function create(Request $request)
+    /**
+     * @param UserRequest $request
+     * 
+     * @return RedirectResponse
+     */
+    public function create(UserRequest $request) : RedirectResponse
     {
         $data = [
             'name'          => $request->name,
@@ -80,11 +86,11 @@ class NguoiDungController extends Controller
 
     /**
      * @param integer $id
-     * @param Request $request
+     * @param UserRequest $request
      * 
      * @return RedirectResponse
      */
-    public function update(int $id, Request $request) : RedirectResponse
+    public function update(int $id, UserRequest $request) : RedirectResponse
     {
         $user = User::find($id);
 

@@ -9,6 +9,7 @@ use App\Models\Xe;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
 use App\Exports\XeExport;
+use App\Http\Requests\XeRequest;
 
 class XeController extends Controller
 {
@@ -63,11 +64,11 @@ class XeController extends Controller
     }
 
     /**
-     * @param Request $request
+     * @param XeRequest $request
      * 
      * @return RedirectResponse
      */
-    public function create(Request $request) : RedirectResponse
+    public function create(XeRequest $request) : RedirectResponse
     {
         $data = [
             'tenChuXe'      => $request->tenChuXe,
@@ -106,11 +107,11 @@ class XeController extends Controller
 
     /**
      * @param integer $id
-     * @param Request $request
+     * @param XeRequest $request
      * 
      * @return RedirectResponse|View
      */
-    public function update(int $id, Request $request) : RedirectResponse|View
+    public function update(int $id, XeRequest $request) : RedirectResponse|View
     {
         $xe = Xe::find($id);
 
